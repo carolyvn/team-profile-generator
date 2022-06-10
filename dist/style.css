@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    background-color: rgb(170, 74, 74);
+}
+.employee-card {
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.card-body {
+    background-color: lightgrey;
+}
+
+li {
+    list-style: none;
+    padding: 5px;
+    border: 1px solid rgb(118, 113, 113);
+    background-color: white;
+}

@@ -4,9 +4,9 @@ const fs = require('fs');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const generateHTML = require('./src/generateHTML');
+const generateTeam = require('./src/template');
 
-let team = [];
+let teamList = [];
 
 function createTeam() {
     inquirer.prompt([
@@ -21,8 +21,8 @@ function createTeam() {
                 'No others',
             ]
         }
-    ]).then((userInput) => {
-        switch(userInput.employeeType) {
+    ]).then((answer) => {
+        switch(answer.employeeType) {
             case 'Manager':
                 addManager();
                 break;
@@ -36,7 +36,7 @@ function createTeam() {
                 buildHTML();
         }
     });
-
+    // console.log(teamList);
 }
 
 function addManager() {
@@ -64,7 +64,9 @@ function addManager() {
         ])
     .then((answers) => {
         const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
-        team.push(manager);
+        // console.log(answers);
+        teamList.push(manager);
+        // console.log(teamList);
         createTeam();
     });
 }
@@ -94,7 +96,9 @@ function addEngineer() {
     ])
     .then((answers) => {
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-        team.push(engineer);
+        // console.log(answers);
+        teamList.push(engineer);
+        // console.log(teamList);
         createTeam();
     });
 }
@@ -124,13 +128,16 @@ function addIntern() {
     ])
     .then((answers) => {
         const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
-        team.push(intern);
+        // console.log(answers);
+        teamList.push(intern);
+        // console.log(teamList);
+        // console.log(teamList[0]);
         createTeam();
     });
 }
 
 function buildHTML() {
-    fs.writeFileSync('index.html', generateHTML(team));
+    fs.writeFileSync('./dist/index.html', generateTeam(teamList));
     console.log(`You have successfully create Team Profile`);
 }
 
